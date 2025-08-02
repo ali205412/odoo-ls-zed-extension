@@ -1,0 +1,8 @@
+name = "Odoo Python"
+grammar = "python"
+path_suffixes = ["py"]
+line_comments = ["# "]
+tab_size = 4
+
+[language_servers]
+odoo-ls = { except_path_suffixes = ["__pycache__", ".git"] }

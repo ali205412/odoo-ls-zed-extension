@@ -1,0 +1,20 @@
+# Rust build artifacts
+/target/
+Cargo.lock
+
+# Zed extension build
+*.wasm
+
+# Cloned odoo-ls repository
+/odoo-ls/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
