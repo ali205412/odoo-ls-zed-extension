@@ -1,4 +1,4 @@
-name = "Odoo Python"
+name = "Python"
 grammar = "python"
 path_suffixes = ["py"]
 line_comments = ["# "]

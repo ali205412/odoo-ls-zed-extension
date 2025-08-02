@@ -1,6 +1,6 @@
 id = "odoo-ls"
 name = "Odoo Language Server"
-version = "0.0.1"
+version = "0.1.0"
 schema_version = 1
 authors = ["Ali Abdelaal <yui@kotegawa.org>"]
 description = "Language support for Odoo development using odoo-ls"
@@ -8,4 +8,4 @@ repository = "https://github.com/ali205412/odoo-ls-zed-extension"
 
 [language_servers.odoo-ls]
 name = "Odoo Language Server"
-languages = ["Odoo Python"]
+languages = ["Python"]

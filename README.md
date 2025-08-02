@@ -12,14 +12,16 @@ This extension provides [Odoo Language Server](https://github.com/odoo/odoo-ls) 
 
 ## Prerequisites
 
-The extension will automatically download the appropriate `odoo_ls_server` binary for your platform when first activated.
+The extension will automatically download and build the Odoo Language Server on first use. You need to have the following installed:
+
+- **Git** - for cloning the odoo-ls repository
+- **Rust/Cargo** - for building the language server
+
+If you don't have Rust installed, you can install it from [rustup.rs](https://rustup.rs/).
 
 ### Manual Installation (Optional)
 
-If you prefer to install the language server manually:
-
-1. Download the latest release from [odoo-ls releases](https://github.com/odoo/odoo-ls/releases)
-2. Make sure `odoo_ls_server` is available in your system PATH
+If you prefer to install the language server manually, you can build it from source and ensure `odoo_ls_server` is available in your PATH.
 
 ## Installation
 
@@ -33,11 +35,45 @@ If you prefer to install the language server manually:
 
 ## Usage
 
-The extension automatically activates when you open Python files in a project containing `__manifest__.py` files (Odoo module markers).
+The extension automatically activates when you open Python files. It works best in projects containing `__manifest__.py` files (Odoo module markers).
+
+## Known Issues
+
+If you see errors about missing directories like:
+```
+canonicalizing "/home/odoo/.repositories/odoo/worktrees/17.0"
+Caused by: No such file or directory (os error 2)
+```
+
+These are from the language server trying to access default Odoo paths. Configure the correct paths in your settings as shown above.
 
 ## Configuration
 
-The extension works with Odoo Python files and provides language server features through the `odoo-ls` language server.
+You can configure the Odoo Language Server in your Zed settings.json:
+
+```json
+{
+  "lsp": {
+    "odoo-ls": {
+      "initialization_options": {
+        "addons": ["/path/to/your/addons"],
+        "python": "python3",
+        "tracked_folders": ["/path/to/track"],
+        "stubs": [],
+        "no_typeshed": false
+      }
+    }
+  }
+}
+```
+
+### Configuration Options
+
+- `addons`: Array of paths to your Odoo addon directories
+- `python`: Python interpreter to use (default: "python3")
+- `tracked_folders`: Directories to track for diagnostics
+- `stubs`: Additional stub directories
+- `no_typeshed`: Disable typeshed stubs
 
 ## Development
 

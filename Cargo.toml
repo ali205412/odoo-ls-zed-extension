@@ -1,6 +1,6 @@
 [package]
 name = "odoo-ls"
-version = "0.0.1"
+version = "0.1.0"
 edition = "2021"
 
 [lib]
@@ -8,3 +8,4 @@ crate-type = ["cdylib"]
 
 [dependencies]
 zed_extension_api = "0.0.6"
+serde_json = "1.0"
