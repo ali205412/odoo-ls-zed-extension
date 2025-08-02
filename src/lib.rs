@@ -76,7 +76,7 @@ impl OdooLsExtension {
             fs::rename(&downloaded_path, &binary_path)
                 .map_err(|e| format!("failed to rename binary: {e}"))?;
 
-            #[cfg(not(target_os = "windows"))]
+            #[cfg(all(not(target_os = "windows"), not(target_arch = "wasm32")))]
             {
                 use std::os::unix::fs::PermissionsExt;
                 let mut perms = fs::metadata(&binary_path)
