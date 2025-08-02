@@ -7,5 +7,5 @@ description = "Language support for Odoo development using odoo-ls"
 repository = "https://github.com/ali205412/odoo-ls-zed-extension"
 
 [language_servers.odoo-ls]
-name = "Odoo Language Server"
+name = "odoo-ls"
 languages = ["Python"]

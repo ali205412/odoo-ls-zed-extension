@@ -1,6 +1,6 @@
 use std::fs;
 use std::process::Command;
-use zed_extension_api::{self as zed, Result};
+use zed_extension_api::{self as zed, Result, settings::LspSettings};
 use serde_json::json;
 
 struct OdooLsExtension {
@@ -114,25 +114,29 @@ impl zed::Extension for OdooLsExtension {
     ) -> Result<zed::Command> {
         Ok(zed::Command {
             command: self.language_server_binary_path(language_server_id, worktree)?,
-            args: vec![],
+            args: vec!["--log-level".to_string(), "info".to_string()],
             env: Default::default(),
         })
     }
     
     fn language_server_initialization_options(
         &mut self,
-        _language_server_id: &zed::LanguageServerId,
-        _worktree: &zed::Worktree,
+        server_id: &zed::LanguageServerId,
+        worktree: &zed::Worktree,
     ) -> Result<Option<serde_json::Value>> {
-        // Provide default initialization options for odoo-ls
-        // Users can override these through Zed's settings.json
-        Ok(Some(json!({
-            "addons": [],
-            "python": "python3",
-            "tracked_folders": [],
-            "stubs": [],
-            "no_typeshed": false
-        })))
+        // Get user settings from Zed's settings.json
+        let settings = LspSettings::for_worktree(server_id.as_ref(), worktree)
+            .ok()
+            .and_then(|lsp_settings| lsp_settings.initialization_options.clone())
+            .unwrap_or_else(|| json!({
+                "addons": [],
+                "python": "python3",
+                "tracked_folders": [],
+                "stubs": [],
+                "no_typeshed": false
+            }));
+        
+        Ok(Some(settings))
     }
 }
 

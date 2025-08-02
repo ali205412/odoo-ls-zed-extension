@@ -67,11 +67,37 @@ You can configure the Odoo Language Server in your Zed settings.json:
 }
 ```
 
+### Project-Specific Configuration
+
+For project-specific settings, create a `.zed/settings.json` file in your project root:
+
+```json
+{
+  "lsp": {
+    "odoo-ls": {
+      "initialization_options": {
+        "addons": [
+          "/path/to/project/addons",
+          "/path/to/enterprise",
+          "/path/to/custom_addons"
+        ],
+        "python": "python3",
+        "tracked_folders": [
+          "/path/to/custom_addons"
+        ],
+        "stubs": [],
+        "no_typeshed": false
+      }
+    }
+  }
+}
+```
+
 ### Configuration Options
 
 - `addons`: Array of paths to your Odoo addon directories
 - `python`: Python interpreter to use (default: "python3")
-- `tracked_folders`: Directories to track for diagnostics
+- `tracked_folders`: Directories to track for diagnostics (typically your custom modules)
 - `stubs`: Additional stub directories
 - `no_typeshed`: Disable typeshed stubs
 

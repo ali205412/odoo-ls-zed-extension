@@ -8,6 +8,9 @@ Cargo.lock
 # Cloned odoo-ls repository
 /odoo-ls/
 
+# Reference repositories
+/python-lsp-zed-extension/
+
 # OS files
 .DS_Store
 Thumbs.db
