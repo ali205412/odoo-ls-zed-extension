@@ -79,9 +79,12 @@ impl OdooLsExtension {
             #[cfg(not(target_os = "windows"))]
             {
                 use std::os::unix::fs::PermissionsExt;
-                let mut perms = fs::metadata(&binary_path)?.permissions();
+                let mut perms = fs::metadata(&binary_path)
+                    .map_err(|e| format!("failed to get file metadata: {e}"))?
+                    .permissions();
                 perms.set_mode(0o755);
-                fs::set_permissions(&binary_path, perms)?;
+                fs::set_permissions(&binary_path, perms)
+                    .map_err(|e| format!("failed to set permissions: {e}"))?;
             }
 
             let entries = fs::read_dir(".")
