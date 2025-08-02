@@ -12,16 +12,45 @@ This extension provides [Odoo Language Server](https://github.com/odoo/odoo-ls) 
 
 ## Prerequisites
 
-The extension will automatically download and build the Odoo Language Server on first use. You need to have the following installed:
+You need to install the Odoo Language Server before using this extension. Follow these steps:
 
-- **Git** - for cloning the odoo-ls repository
-- **Rust/Cargo** - for building the language server
+### Installing Odoo Language Server
 
-If you don't have Rust installed, you can install it from [rustup.rs](https://rustup.rs/).
+1. **Install Rust** (if not already installed):
+   ```bash
+   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+   ```
 
-### Manual Installation (Optional)
+2. **Clone and build odoo-ls**:
+   ```bash
+   git clone https://github.com/odoo/odoo-ls.git
+   cd odoo-ls/server
+   cargo build --release
+   ```
 
-If you prefer to install the language server manually, you can build it from source and ensure `odoo_ls_server` is available in your PATH.
+3. **Add to PATH** (choose one option):
+   
+   Option A - Add the binary directory to PATH:
+   ```bash
+   export PATH=$PATH:$(pwd)/target/release
+   # Add this line to your ~/.bashrc or ~/.zshrc to make it permanent
+   ```
+   
+   Option B - Install globally:
+   ```bash
+   cargo install --path .
+   ```
+   
+   Option C - Create a symlink:
+   ```bash
+   sudo ln -s $(pwd)/target/release/odoo_ls_server /usr/local/bin/
+   ```
+
+4. **Verify installation**:
+   ```bash
+   which odoo_ls_server
+   # Should output the path to the binary
+   ```
 
 ## Installation
 
